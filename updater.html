@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UBC Tours — Schedule Updater</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+  :root{--navy:#0a2540;--blue:#2f6db5;--lightbg:#eef4fb;--green:#1e8e5a;--red:#c0392b;--line:#d8e3f0;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--lightbg);color:#16273d;line-height:1.5;}
+  .wrap{max-width:820px;margin:0 auto;padding:24px 18px 80px;}
+  header{background:var(--navy);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:22px;}
+  header h1{margin:0 0 6px;font-size:22px;}
+  header p{margin:0;color:#cfe0f4;font-size:14px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:18px;box-shadow:0 1px 3px rgba(10,37,64,.05);}
+  .step{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--blue);text-transform:uppercase;margin-bottom:8px;}
+  h2{margin:0 0 12px;font-size:18px;}
+  .drop{border:2px dashed #b9cce4;border-radius:12px;padding:34px 20px;text-align:center;background:#f7fafe;cursor:pointer;transition:.15s;}
+  .drop.hover{border-color:var(--blue);background:#eef4fb;}
+  .drop strong{display:block;font-size:16px;margin-bottom:4px;}
+  .drop span{color:#5a6e87;font-size:13px;}
+  input[type=file]{display:none;}
+  .btn{display:inline-block;border:none;border-radius:10px;padding:13px 20px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;}
+  .btn-primary{background:var(--blue);color:#fff;}
+  .btn-primary:hover{background:#27598f;}
+  .btn-green{background:var(--green);color:#fff;}
+  .btn-green:hover{background:#176e45;}
+  .btn[disabled]{opacity:.5;cursor:not-allowed;}
+  .files{margin:14px 0 0;font-size:14px;}
+  .files li{margin:3px 0;}
+  .hidden{display:none;}
+  .summary{background:#eaf6ef;border:1px solid #bfe3cf;border-radius:10px;padding:14px 16px;font-size:15px;}
+  .summary b{color:var(--green);}
+  .warn{background:#fdf0ee;border:1px solid #f3c9c2;border-radius:10px;padding:14px 16px;margin-top:14px;font-size:14px;}
+  .warn h3{margin:0 0 8px;font-size:14px;color:var(--red);}
+  .warn ul{margin:6px 0 0;padding-left:20px;}
+  .warn li{margin:2px 0;}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:10px;}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);}
+  th{color:#5a6e87;font-weight:600;}
+  .search{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-size:15px;margin-top:6px;}
+  .muted{color:#5a6e87;font-size:13px;}
+  .spin{display:inline-block;width:16px;height:16px;border:2px solid #ccd;border-top-color:var(--blue);border-radius:50%;animation:s .7s linear infinite;vertical-align:-3px;margin-right:8px;}
+  @keyframes s{to{transform:rotate(360deg);}}
+  ol.guide{margin:8px 0 0;padding-left:22px;}
+  ol.guide li{margin:6px 0;}
+  code{background:#eef2f7;padding:1px 6px;border-radius:5px;font-size:13px;}
+  .err{color:var(--red);font-weight:600;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>UBC Tours — Schedule Updater</h1>
+    <p>Upload the monthly schedule PDFs and download the finished website files. No coding, no Claude.</p>
+  </header>
+
+  <div class="card">
+    <div class="step">Step 1</div>
+    <h2>Add the schedule PDFs</h2>
+    <p class="muted">Select <b>all</b> the months you want live (e.g. June, July, August). Each person gets one calendar covering every month, so include them all together.</p>
+    <label class="drop" id="drop">
+      <strong>Click to choose PDF files</strong>
+      <span>or drag &amp; drop them here — you can select several at once</span>
+      <input type="file" id="file" accept="application/pdf,.pdf" multiple>
+    </label>
+    <ul class="files" id="filelist"></ul>
+    <p id="parsestatus" class="muted"></p>
+  </div>
+
+  <div class="card hidden" id="previewCard">
+    <div class="step">Step 2</div>
+    <h2>Check the schedule</h2>
+    <div class="summary" id="summary"></div>
+    <div id="releasedBox"></div>
+    <p class="muted" style="margin-top:16px;">Spot-check anyone (type a name to see their shifts):</p>
+    <input class="search" id="search" placeholder="e.g. Rina" autocomplete="off">
+    <div id="searchResult"></div>
+  </div>
+
+  <div class="card hidden" id="downloadCard">
+    <div class="step">Step 3</div>
+    <h2>Download &amp; publish</h2>
+    <p>This gives you a <code>.zip</code> with the updated <code>index.html</code> and <code>cal</code> folder — the same two things you upload to GitHub.</p>
+    <p><button class="btn btn-green" id="generate">Download files to publish</button> <span id="genstatus" class="muted"></span></p>
+    <div class="hidden" id="published">
+      <div class="step" style="margin-top:18px;">Last step</div>
+      <ol class="guide">
+        <li>Unzip the downloaded file — you'll get <code>index.html</code> and a <code>cal</code> folder.</li>
+        <li>Go to your repo: <a href="https://github.com/rinahatakeyama3-coder/UBC_Tours" target="_blank">github.com/rinahatakeyama3-coder/UBC_Tours</a></li>
+        <li>Click <b>Add file → Upload files</b>, drag in <b>both</b> <code>index.html</code> and the <code>cal</code> folder, then <b>Commit changes</b>.</li>
+        <li>Wait ~2 minutes, then hard-refresh the live site (<code>Cmd+Shift+R</code>). Everyone's subscribed calendars update on their own.</li>
+      </ol>
+    </div>
+  </div>
+
+  <p class="muted">Tip: open this page from your live site (the <code>github.io</code> link) so it can use your current site as the starting template.</p>
+</div>
+
+<script>
+/* ===== PDF.js worker ===== */
+pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+/* ===== UBC PDF parser (validated) ===== */
+// UBC Tours PDF parser — runs in Node (pdfjs-dist) and browser (pdfjsLib global).
+// Faithful port of validated parser.py + build_from_parser.py.
+(function(root){
+"use strict";
+
+const WEEKDAYS=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+const MONTHS={January:1,February:2,March:3,April:4,May:5,June:6,July:7,August:8,September:9,October:10,November:11,December:12};
+const NAMES=["date","etype","etime","amb","lead","pres","rad","dom","intl","notes"];
+const WEEKDAY_RE=/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?$/;
+const DATE_FULL=/(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+(\w+)\s+(\d{1,2})/;
+const TIME_RANGE=/\(?\s*(\d{1,2}):(\d{2})\s*[-\u2013\u2014]\s*(\d{1,2}):(\d{2})\s*\)?/;
+const EVTIME=/(\d{1,2}):(\d{2})\s*(AM|PM)?\s*[-\u2013\u2014]\s*(\d{1,2}):(\d{2})\s*(AM|PM)?/;
+const LABEL_TOK=/^([A-H]|T[12]|Q[12]):$/;
+const KNOWN_MULTI=new Set(["Yu Teng","Ella J","Ella M","Ruby H","Ella J."]);
+const NAME_FIX={"Ella J.":"Ella J","Roby":"Robyn","Ruby H":"Ruby"};
+
+// ---- geometry extraction from a page's operator list ----
+async function extractPage(page, OPS){
+  const vp=page.getViewport({scale:1}); const H=vp.height;
+  // text -> words
+  const tc=await page.getTextContent();
+  const words=[];
+  for(const it of tc.items){
+    const s=it.str; if(!s||!s.trim()) continue;
+    const x=it.transform[4]; const yb=H-it.transform[5]; // baseline top-down
+    const h=it.height||10; const w=it.width||0;
+    const parts=s.split(/(\s+)/); // keep spaces to track offsets
+    let cx=x; const per=w/Math.max(s.length,1);
+    for(const part of parts){
+      if(part.trim()){
+        const pw=per*part.length;
+        words.push({str:part,x0:cx,x1:cx+pw,y0:yb-h,y1:yb});
+      }
+      cx+=per*part.length;
+    }
+  }
+  // operator list -> segments
+  const ops=await page.getOperatorList();
+  const hseg=[], vseg=[];
+  let ctm=[1,0,0,1,0,0]; const stack=[]; let path=[];
+  const mul=(m,n)=>[m[0]*n[0]+m[2]*n[1], m[1]*n[0]+m[3]*n[1], m[0]*n[2]+m[2]*n[3], m[1]*n[2]+m[3]*n[3], m[0]*n[4]+m[2]*n[5]+m[4], m[1]*n[4]+m[3]*n[5]+m[5]];
+  const ap=(m,x,y)=>[m[0]*x+m[2]*y+m[4], m[1]*x+m[3]*y+m[5]];
+  const emit=()=>{
+    for(const seg of path){
+      let [x0,y0]=ap(ctm,seg[0],seg[1]); let [x1,y1]=ap(ctm,seg[2],seg[3]);
+      y0=H-y0; y1=H-y1;
+      if(Math.abs(y0-y1)<2 && Math.abs(x1-x0)>3) hseg.push({x0:Math.min(x0,x1),x1:Math.max(x0,x1),y:(y0+y1)/2});
+      else if(Math.abs(x0-x1)<2 && Math.abs(y1-y0)>3) vseg.push({x:(x0+x1)/2,y0:Math.min(y0,y1),y1:Math.max(y0,y1)});
+    }
+    path=[];
+  };
+  for(let i=0;i<ops.fnArray.length;i++){
+    const fn=ops.fnArray[i], a=ops.argsArray[i];
+    if(fn===OPS.save) stack.push(ctm.slice());
+    else if(fn===OPS.restore) ctm=stack.pop()||[1,0,0,1,0,0];
+    else if(fn===OPS.transform) ctm=mul(ctm,a);
+    else if(fn===OPS.constructPath){
+      const pops=a[0], co=a[1]; let ci=0, cx=0, cy=0;
+      for(const op of pops){
+        if(op===OPS.moveTo){ cx=co[ci++]; cy=co[ci++]; }
+        else if(op===OPS.lineTo){ const nx=co[ci++], ny=co[ci++]; path.push([cx,cy,nx,ny]); cx=nx; cy=ny; }
+        else if(op===OPS.curveTo){ ci+=6; }
+        else if(op===OPS.rectangle){ const x=co[ci++],y=co[ci++],w=co[ci++],h=co[ci++];
+          // Transform the rectangle and classify by shape (top-down coords).
+          const cs=[ap(ctm,x,y),ap(ctm,x+w,y),ap(ctm,x+w,y+h),ap(ctm,x,y+h)].map(p=>[p[0],H-p[1]]);
+          const X=cs.map(p=>p[0]), Y=cs.map(p=>p[1]);
+          const rx0=Math.min.apply(null,X),rx1=Math.max.apply(null,X),ry0=Math.min.apply(null,Y),ry1=Math.max.apply(null,Y);
+          const rw=rx1-rx0, rh=ry1-ry0;
+          if(rh>3 && rw>3){ // a cell box: only its left/right edges are column lines (NOT top/bottom — those are not strikethroughs)
+            vseg.push({x:rx0,y0:ry0,y1:ry1}); vseg.push({x:rx1,y0:ry0,y1:ry1});
+          } else if(rh<=3 && rw>3){ // thin horizontal rule (underline / strikethrough)
+            hseg.push({x0:rx0,x1:rx1,y:(ry0+ry1)/2});
+          } else if(rw<=3 && rh>3){ // thin vertical rule
+            vseg.push({x:(rx0+rx1)/2,y0:ry0,y1:ry1});
+          }
+        }
+      }
+    }
+    else if(fn===OPS.stroke||fn===OPS.fill||fn===OPS.eoFill||fn===OPS.fillStroke||fn===OPS.closePath) emit();
+  }
+  return {words,hseg,vseg};
+}
+
+function detectBoundaries(allV, anchorX){
+  // count x positions of vertical segments (tall ones)
+  const cnt={};
+  for(const v of allV){ if(v.y1-v.y0>10){ const k=Math.round(v.x); cnt[k]=(cnt[k]||0)+1; } }
+  // merge near duplicates
+  const xs=Object.keys(cnt).map(Number).sort((a,b)=>a-b);
+  const merged=[]; // [x,count]
+  for(const x of xs){ if(merged.length && x-merged[merged.length-1][0]<=6) merged[merged.length-1][1]+=cnt[x]; else merged.push([x,cnt[x]]); }
+  if(!merged.length) return [];
+  // Real column grid lines are drawn on (nearly) every row, so they share a high, similar
+  // frequency. Spurious lines (page margins, stray partial borders) are far less frequent.
+  // Keep only lines whose count is at least half the strongest line's count.
+  let maxc=0; merged.forEach(m=>{ if(m[1]>maxc) maxc=m[1]; });
+  let kept=merged.filter(m=>m[1]>=0.5*maxc);
+  // Drop anything well to the left of the date text (outer page-border lines).
+  if(anchorX!=null) kept=kept.filter(m=>m[0]>=anchorX-15);
+  let out=kept.map(m=>m[0]).sort((a,b)=>a-b);
+  // Safety: never return more than 11 boundaries; if over, keep the most frequent 11.
+  if(out.length>11){ out=kept.slice().sort((a,b)=>b[1]-a[1]).slice(0,11).map(m=>m[0]).sort((a,b)=>a-b); }
+  return out;
+}
+
+function isStruck(w,hsegs){
+  const mid=(w.y0+w.y1)/2, h=w.y1-w.y0;
+  for(const s of hsegs){
+    if(s.y>=w.y0-0.3*h && s.y<=w.y1+0.3*h && Math.abs(s.y-mid)<0.45*h+1){
+      if(Math.min(w.x1,s.x1)-Math.max(w.x0,s.x0)>0.4*(w.x1-w.x0)) return true;
+    }
+  }
+  return false;
+}
+
+function ct(cols,c){ return cols[c].slice().sort((a,b)=>a[0]-b[0]||a[1]-b[1]).map(t=>t[2]).join(" "); }
+
+function parsePages(pages){
+  // Weekday-word x position anchors the date column (robust against stray grid lines).
+  const wdc={};
+  pages.forEach(p=>p.words.forEach(w=>{ if(WEEKDAY_RE.test(w.str)){ const k=Math.round(w.x0); wdc[k]=(wdc[k]||0)+1; } }));
+  let anchorX=null, best=0;
+  for(const k in wdc){ if(wdc[k]>best){ best=wdc[k]; anchorX=+k; } }
+  const allV=[]; pages.forEach(p=>p.vseg.forEach(v=>allV.push(v)));
+  let bnd=detectBoundaries(allV, anchorX); if(bnd.length>=11) bnd=bnd.slice(0,11);
+  const d0=bnd[0], d1=bnd[1];
+  const colOf=(x)=>{ for(let i=0;i<bnd.length-1;i++){ if(x>=bnd[i]-3 && x<bnd[i+1]) return NAMES[i]||"notes"; } if(x>=bnd[bnd.length-1]-3) return "notes"; return "date"; };
+  // A strikethrough is confined to a single cell; full-width separator/border rules are not strikes.
+  let maxColW=0; for(let i=0;i+1<bnd.length;i++){ const g=bnd[i+1]-bnd[i]; if(g>maxColW) maxColW=g; }
+  const strikeCap=maxColW>0?maxColW*1.8:200;
+  const HDR=new Set(["Date","Event","Type","Time","(PT)","Student","Ambassadors","Tour","Lead","Presenter","RAD","Call","on","Domestic","Advisor","International","Notes"]);
+  const events=[]; let cur=null;
+  const mk=()=>{ const o={}; NAMES.forEach(n=>o[n]=[]); return o; };
+  for(const pg of pages){
+    const words=pg.words, hseg=pg.hseg.filter(s=>s.x1-s.x0<=strikeCap);
+    const tops=[];
+    for(const w of words){ if(w.x0>=d0-8 && w.x0<d1 && WEEKDAY_RE.test(w.str)) tops.push(Math.round(w.y0)); }
+    tops.sort((a,b)=>a-b);
+    const mtops=[]; for(const y of tops){ if(!mtops.length || y-mtops[mtops.length-1]>6) mtops.push(y); }
+    if(!mtops.length) continue;
+    const assign=(wl,bucket)=>{ for(const w of wl){ bucket[colOf(w.x0)].push([Math.round(w.y0),Math.round(w.x0),w.str,isStruck(w,hseg)]); } };
+    for(let ti=0;ti<mtops.length;ti++){
+      const ty=mtops[ti], ye=ti+1<mtops.length?mtops[ti+1]:1e9;
+      const band=words.filter(w=>{ const yc=(w.y0+w.y1)/2; return yc>=ty-2 && yc<ye; });
+      const b=mk(); assign(band,b);
+      const allt=ct(b,"date")+" "+ct(b,"etype");
+      if(allt.indexOf("Vancouver Campus")>=0||allt.indexOf("you.ubc.ca")>=0||allt.indexOf("Tel 604")>=0) continue;
+      if(cur) events.push(cur); cur=b;
+    }
+    const cont=words.filter(w=>{ const yc=(w.y0+w.y1)/2; return yc<mtops[0]-2 && !HDR.has(w.str) && w.str.indexOf("UBC")!==0 && (w.x0>=d1 || !WEEKDAY_RE.test(w.str)); });
+    if(cont.length && (cur||events.length)) assign(cont, cur||events[events.length-1]);
+  }
+  if(cur) events.push(cur);
+  return events;
+}
+
+// ---- record extraction ----
+function fixName(n){ n=n.replace(/\s+/g," ").trim().replace(/,$/,""); return NAME_FIX[n]||n; }
+function convAmpm(h,m){ if(h>=1&&h<=7) h+=12; return [h,m]; }
+function to24(h,m,ap,pm){ h=+h;m=+m; if(ap==="PM"&&h!==12)h+=12; else if(ap==="AM"&&h===12)h=0; else if(!ap&&pm&&h<8)h+=12; return [h,m]; }
+function parseEventTime(t){
+  const m=EVTIME.exec(t.replace(/\n/g," ")); if(!m) return null;
+  let [,h1,m1,ap1,h2,m2,ap2]=m;
+  if(!ap1&&!ap2){ const sh=+h1; ap1=sh>=8?"AM":"PM"; ap2="PM"; }
+  const [sh,sm]=to24(h1,m1,ap1), [eh,em]=to24(h2,m2,ap2); return [sh,sm,eh,em];
+}
+function splitEntries(cells){
+  const ws=cells.slice().sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+  const out=[]; let cur=null;
+  for(const [y,x,t,s] of ws){
+    if(LABEL_TOK.test(t)){ cur={label:t.slice(0,-1),words:[]}; out.push(cur); }
+    else if(cur) cur.words.push([t,s]);
+  }
+  return out;
+}
+function parseAmbEntry(e){
+  const toks=e.words.map(w=>w[0]); const struck=e.words.some(w=>w[1]);
+  const txt=toks.join(" "); const tm=TIME_RANGE.exec(txt); let time=null;
+  if(tm){ const [a,b]=convAmpm(+tm[1],+tm[2]); const [c,d]=convAmpm(+tm[3],+tm[4]); time=[a,b,c,d]; }
+  let name=txt.replace(/\([^)]*\)/g,"").replace(/\([^)]*$/,"");
+  name=name.split(/\bshadowing\b/i)[0].replace(/\(/g,"").trim().replace(/,$/,"").trim().replace(/\s+/g," ").trim();
+  if(!KNOWN_MULTI.has(name) && name.indexOf(" ")>=0){ const p=name.split(" "); name=KNOWN_MULTI.has(p.slice(0,2).join(" "))?p.slice(0,2).join(" "):p[0]; }
+  return {name,time,struck};
+}
+function classify(et){
+  const e=et.toLowerCase();
+  if(e.indexOf("no tours")>=0) return [null,false];
+  const hold=e.indexOf("hold")>=0;
+  if(e.indexOf("virtual")>=0) return ["Virtual Tour",hold];
+  if(e.indexOf("1:1")>=0||e.indexOf("initial")>=0) return ["1:1",hold];
+  const gk=["group","school","college","academy","secondary","wenzhou","aqg","shanghai","ilsc","matheson","boren","washington","ghana","sslc","powerful","collingwood","delta","douglas"];
+  if(gk.some(k=>e.indexOf(k)>=0)) return ["Group Tour",hold];
+  if(e.indexOf("in-person")>=0||e.indexOf("tour")>=0) return ["In-Person Tour",hold];
+  return ["Tour",hold];
+}
+function etypeLabel(kind,hold){ if(kind==="Group Tour") return hold?"Group Tour - HOLD":"Group Tour"; return kind; }
+function cleanPeople(txt){
+  txt=txt.replace(/\([^)]*\)/g,"").replace(/(Pre-tour|Post-tour|shadowing)[\s\S]*/i,"");
+  const out=[];
+  for(let tok of txt.split(/[,&]| and /)){
+    tok=tok.trim();
+    if(!tok||["TL","\u2013","\u2014","-","Main:","Back-up:"].indexOf(tok)>=0) continue;
+    if(/\d/.test(tok)) continue;
+    tok=tok.replace(/\s+/g," ").trim();
+    if(tok.length>=1&&tok.length<=20&&tok[0]===tok[0].toUpperCase()) out.push(tok);
+  }
+  return out.slice(0,1);
+}
+function tagRole(recs,mo,day,nm,extra){
+  for(const r of recs){ if(r.m===mo&&r.d===day&&r.name.toLowerCase()===nm.toLowerCase()&&(r.role==="Ambassador"||r.role==="Virtual host")){ if(r.role.indexOf(extra)<0) r.role=r.role+" + "+extra; return; } }
+}
+function buildRecords(events){
+  const recs=[];
+  for(const e of events){
+    const dt=ct(e,"date"); const m=DATE_FULL.exec(dt); let mo,day;
+    if(!m){ const m2=/(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+(\w+)\s+(\d{1,2})/.exec(dt); if(!m2)continue; if(!MONTHS[m2[2]])continue; mo=MONTHS[m2[2]]; day=+m2[3]; }
+    else { if(!MONTHS[m[2]]) continue; mo=MONTHS[m[2]]; day=+m[3]; }
+    const [kind,hold]=classify(ct(e,"etype")); if(!kind) continue;
+    const evt=parseEventTime(ct(e,"etime"));
+    let ambEntries=splitEntries(e.amb);
+    if(kind==="1:1" && !ambEntries.length){ const ws=e.amb.slice().sort((a,b)=>a[0]-b[0]||a[1]-b[1]); ambEntries=[{label:null,words:ws.map(w=>[w[2],w[3]])}]; }
+    const ambNames=new Set();
+    for(const ent of ambEntries){
+      const {name,time,struck}=parseAmbEntry(ent);
+      if(!name||["\u2013","\u2014","-",""].indexOf(name)>=0) continue;
+      if(name.toLowerCase()==="tl") continue;
+      const nm=fixName(name);
+      if(kind==="1:1"){ const t=evt; if(t) recs.push({name:nm,y:2026,m:mo,d:day,sh:t[0],sm:t[1],eh:t[2],em:t[3],type:"Initial Ambassador 1:1",role:"Initial 1:1",hold:false,released:struck}); ambNames.add(nm.toLowerCase()); continue; }
+      const role=kind==="Virtual Tour"?"Virtual host":"Ambassador";
+      const t=time||evt; if(!t) continue;
+      recs.push({name:nm,y:2026,m:mo,d:day,sh:t[0],sm:t[1],eh:t[2],em:t[3],type:etypeLabel(kind,hold),role,hold,released:struck});
+      ambNames.add(nm.toLowerCase());
+    }
+    const lead=cleanPeople(ct(e,"lead")), pres=cleanPeople(ct(e,"pres"));
+    for(let nm of lead){ nm=fixName(nm); if(ambNames.has(nm.toLowerCase())){ tagRole(recs,mo,day,nm,"Tour lead"); continue; } if(evt) recs.push({name:nm,y:2026,m:mo,d:day,sh:evt[0],sm:evt[1],eh:evt[2],em:evt[3],type:etypeLabel(kind,hold),role:(kind==="1:1"?"1:1 lead":"Tour lead"),hold,released:false}); }
+    for(let nm of pres){ nm=fixName(nm); if(ambNames.has(nm.toLowerCase())){ tagRole(recs,mo,day,nm,"Presenter"); continue; } if(lead.map(x=>x.toLowerCase()).indexOf(nm.toLowerCase())>=0) continue; if(evt) recs.push({name:nm,y:2026,m:mo,d:day,sh:evt[0],sm:evt[1],eh:evt[2],em:evt[3],type:etypeLabel(kind,hold),role:"Presenter",hold,released:false}); }
+  }
+  return recs;
+}
+
+async function parsePdfData(uint8, pdfjsLib){
+  const doc=await pdfjsLib.getDocument({data:uint8, useSystemFonts:true, isEvalSupported:false}).promise;
+  const OPS=pdfjsLib.OPS; const pages=[];
+  for(let i=1;i<=doc.numPages;i++){ const pg=await doc.getPage(i); pages.push(await extractPage(pg,OPS)); }
+  const events=parsePages(pages);
+  return buildRecords(events);
+}
+
+const api={parsePdfData,parsePages,buildRecords,extractPage,detectBoundaries};
+if(typeof module!=="undefined"&&module.exports) module.exports=api;
+root.UBCParser=api;
+})(typeof window!=="undefined"?window:globalThis);
+
+
+/* ===== ICS generation (matches the published calendar files) ===== */
+var PLACE="UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1";
+function pad(n){return String(n).padStart(2,"0");}
+function offset(m){return (m>=3&&m<=10)?7:8;}
+function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");}
+function utcStamp(y,m,d,h,mi){var dt=new Date(Date.UTC(y,m-1,d,h+offset(m),mi));
+  return dt.getUTCFullYear()+pad(dt.getUTCMonth()+1)+pad(dt.getUTCDate())+"T"+pad(dt.getUTCHours())+pad(dt.getUTCMinutes())+"00Z";}
+function icsDesc(a){var s=a.type+"\\nRole: "+a.role;if(a.hold)s+="\\n(HOLD - tentative)";return s;}
+function buildICS(person,rows,nowStamp){
+  rows=rows.slice().sort(function(a,b){return a.y-b.y||a.m-b.m||a.d-b.d||a.sh-b.sh||a.sm-b.sm;});
+  var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//UBC Tours//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
+    "X-WR-CALNAME:UBC Tours - "+person,"REFRESH-INTERVAL;VALUE=DURATION:PT12H","X-PUBLISHED-TTL:PT12H"];
+  rows.forEach(function(a,i){
+    L.push("BEGIN:VEVENT",
+      "UID:"+slug(person)+"-"+a.y+pad(a.m)+pad(a.d)+"-"+pad(a.sh)+pad(a.sm)+"-"+i+"@ubctours",
+      "DTSTAMP:"+nowStamp,"DTSTART:"+utcStamp(a.y,a.m,a.d,a.sh,a.sm),"DTEND:"+utcStamp(a.y,a.m,a.d,a.eh,a.em),
+      "SUMMARY:UBC Tour - "+person,"DESCRIPTION:"+icsDesc(a),"LOCATION:"+PLACE,"END:VEVENT");
+  });
+  L.push("END:VCALENDAR");
+  return L.join("\r\n");
+}
+
+/* ===== State ===== */
+var ALL_RECORDS=[];   // includes released
+var ACTIVE=[];        // released stripped
+var MONTHS=["","January","February","March","April","May","June","July","August","September","October","November","December"];
+
+/* ===== File handling ===== */
+var fileInput=document.getElementById("file"), drop=document.getElementById("drop");
+drop.addEventListener("dragover",function(e){e.preventDefault();drop.classList.add("hover");});
+drop.addEventListener("dragleave",function(){drop.classList.remove("hover");});
+drop.addEventListener("drop",function(e){e.preventDefault();drop.classList.remove("hover");handleFiles(e.dataTransfer.files);});
+fileInput.addEventListener("change",function(){handleFiles(fileInput.files);});
+
+async function handleFiles(fileList){
+  var files=Array.prototype.slice.call(fileList).filter(function(f){return /\.pdf$/i.test(f.name);});
+  if(!files.length)return;
+  var fl=document.getElementById("filelist");fl.innerHTML="";
+  files.forEach(function(f){var li=document.createElement("li");li.textContent="📄 "+f.name;fl.appendChild(li);});
+  var status=document.getElementById("parsestatus");
+  status.innerHTML='<span class="spin"></span>Reading PDFs…';
+  ALL_RECORDS=[];
+  try{
+    for(var i=0;i<files.length;i++){
+      status.innerHTML='<span class="spin"></span>Reading '+files[i].name+'…';
+      var buf=new Uint8Array(await files[i].arrayBuffer());
+      var recs=await UBCParser.parsePdfData(buf,pdfjsLib);
+      ALL_RECORDS=ALL_RECORDS.concat(recs);
+    }
+    ACTIVE=ALL_RECORDS.filter(function(r){return !r.released;}).map(function(r){var c=Object.assign({},r);delete c.released;return c;});
+    status.innerHTML='✅ Done reading '+files.length+' file'+(files.length>1?'s':'')+'.';
+    showPreview();
+  }catch(err){
+    status.innerHTML='<span class="err">Could not read a PDF: '+(err&&err.message?err.message:err)+'</span>';
+    console.error(err);
+  }
+}
+
+function uniquePeople(recs){var s={};recs.forEach(function(r){s[r.name]=1;});return Object.keys(s).sort(function(a,b){return a.toLowerCase()<b.toLowerCase()?-1:1;});}
+
+function showPreview(){
+  document.getElementById("previewCard").classList.remove("hidden");
+  document.getElementById("downloadCard").classList.remove("hidden");
+  var ppl=uniquePeople(ACTIVE);
+  var months=[];ACTIVE.forEach(function(r){if(months.indexOf(r.m)<0)months.push(r.m);});months.sort(function(a,b){return a-b;});
+  var monthNames=months.map(function(m){return MONTHS[m];}).join(", ");
+  document.getElementById("summary").innerHTML="Found <b>"+ACTIVE.length+"</b> shifts across <b>"+ppl.length+"</b> people in <b>"+monthNames+"</b>.";
+  // released
+  var released=ALL_RECORDS.filter(function(r){return r.released;});
+  var rb=document.getElementById("releasedBox");
+  if(released.length){
+    var byEvent={};
+    released.forEach(function(r){var k=r.name+"|"+r.m+"|"+r.d+"|"+r.type;byEvent[k]=r;});
+    var items=Object.keys(byEvent).map(function(k){var r=byEvent[k];return "<li><b>"+r.name+"</b> — "+MONTHS[r.m]+" "+r.d+" ("+r.type.replace(" - HOLD","")+")</li>";});
+    rb.innerHTML='<div class="warn"><h3>Crossed-off shifts removed ('+items.length+')</h3>'+
+      '<p class="muted" style="margin:0 0 6px;">These names were struck through in the PDF, so they were left off. Make sure that looks right:</p><ul>'+items.join("")+'</ul></div>';
+  }else{
+    rb.innerHTML='<p class="muted" style="margin-top:12px;">No crossed-off shifts found in these PDFs.</p>';
+  }
+  // search
+  var search=document.getElementById("search"), out=document.getElementById("searchResult");
+  search.value="";out.innerHTML="";
+  search.oninput=function(){
+    var q=search.value.trim().toLowerCase();out.innerHTML="";
+    if(!q)return;
+    var rows=ACTIVE.filter(function(r){return r.name.toLowerCase()===q;}).sort(function(a,b){return a.m-b.m||a.d-b.d||a.sh-b.sh;});
+    if(!rows.length){
+      var matches=ppl.filter(function(p){return p.toLowerCase().indexOf(q)===0;}).slice(0,6);
+      out.innerHTML='<p class="muted">No exact match.'+(matches.length?' Did you mean: '+matches.join(", ")+'?':'')+'</p>';
+      return;
+    }
+    var html='<table><tr><th>Date</th><th>Time</th><th>Role</th></tr>';
+    rows.forEach(function(a){
+      var t=fmt12(a.sh,a.sm)+"–"+fmt12(a.eh,a.em);
+      html+='<tr><td>'+MONTHS[a.m]+' '+a.d+'</td><td>'+t+'</td><td>'+a.role+(a.hold?' <span class="muted">(HOLD)</span>':'')+'</td></tr>';
+    });
+    html+='</table>';
+    out.innerHTML=html;
+  };
+}
+function fmt12(h,mi){var ap=h>=12?"PM":"AM";var hh=h%12||12;return hh+(mi?":"+pad(mi):"")+" "+ap;}
+
+/* ===== Generate output ===== */
+document.getElementById("generate").addEventListener("click",async function(){
+  if(!ACTIVE.length){return;}
+  var gs=document.getElementById("genstatus");
+  gs.innerHTML='<span class="spin"></span>Building files…';
+  try{
+    // fetch the current site as a template
+    var tplResp=await fetch("index.html?"+Date.now()).catch(function(){return null;});
+    if(!tplResp||!tplResp.ok) throw new Error("Couldn't load index.html template. Open this page from your live github.io site.");
+    var tpl=await tplResp.text();
+    // swap schedule data
+    var dataJSON=JSON.stringify(ACTIVE).replace(/</g,"\\u003c");
+    tpl=tpl.replace(/<script>window\.UBC_SCHEDULE = \[[\s\S]*?\];<\/script>/, "<script>window.UBC_SCHEDULE = "+dataJSON+";<\/script>");
+    // swap datalist
+    var ppl=uniquePeople(ACTIVE);
+    var options=ppl.map(function(n){return '<option value="'+n.replace(/"/g,"&quot;")+'">';}).join("");
+    tpl=tpl.replace(/(<datalist id="people">)[\s\S]*?(<\/datalist>)/, "$1"+options+"$2");
+    // build ICS files
+    var nowStamp=utcStamp(new Date().getUTCFullYear(),new Date().getUTCMonth()+1,new Date().getUTCDate(),new Date().getUTCHours(),new Date().getUTCMinutes());
+    var zip=new JSZip();
+    zip.file("index.html",tpl);
+    var calFolder=zip.folder("cal");
+    ppl.forEach(function(person){
+      var rows=ACTIVE.filter(function(r){return r.name===person;});
+      calFolder.file(slug(person)+".ics",buildICS(person,rows,nowStamp));
+    });
+    var blob=await zip.generateAsync({type:"blob"});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a");a.href=url;a.download="ubc-tours-update.zip";document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},2000);
+    gs.innerHTML='✅ Downloaded ('+ppl.length+' calendars).';
+    document.getElementById("published").classList.remove("hidden");
+  }catch(err){
+    gs.innerHTML='<span class="err">'+(err&&err.message?err.message:err)+'</span>';
+    console.error(err);
+  }
+});
+</script>
+</body>
+</html>
