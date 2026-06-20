@@ -1,63 +1,295 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//UBC Tours//EN
+PRODID:-//UBC Tours//Shift Finder//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:UBC Tours - Cordelia
-REFRESH-INTERVAL;VALUE=DURATION:PT12H
-X-PUBLISHED-TTL:PT12H
+X-WR-CALNAME:UBC Tours — Cordelia
+X-WR-TIMEZONE:America/Vancouver
+BEGIN:VTIMEZONE
+TZID:America/Vancouver
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
 BEGIN:VEVENT
-UID:cordelia-20260604-1015-0@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260604T171500Z
-DTEND:20260604T192000Z
-SUMMARY:UBC Tour - Cordelia
-DESCRIPTION:Group Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:cordelia-20260604-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260604T101500
+DTEND;TZID=America/Vancouver:20260604T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the Group Tour – LA Matheson Secondary. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:cordelia-20260606-1045-1@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260606T174500Z
-DTEND:20260606T202000Z
-SUMMARY:UBC Tour - Cordelia
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:cordelia-20260606-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260606T104500
+DTEND;TZID=America/Vancouver:20260606T132000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 11:00 AM – 1:00 PM. Your call time is 10:45 AM (through 1:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:cordelia-20260609-1015-2@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260609T171500Z
-DTEND:20260609T192000Z
-SUMMARY:UBC Tour - Cordelia
-DESCRIPTION:Group Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:cordelia-20260609-F@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260609T101500
+DTEND;TZID=America/Vancouver:20260609T122000
+SUMMARY:UBC Tour — slot F
+DESCRIPTION:You're slot F on the Group Tour – West Point Grey Academy. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:cordelia-20260612-0945-3@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260612T164500Z
-DTEND:20260612T192000Z
-SUMMARY:UBC Tour - Cordelia
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:cordelia-20260612-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260612T094500
+DTEND;TZID=America/Vancouver:20260612T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:cordelia-20260618-0945-4@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260618T164500Z
-DTEND:20260618T192000Z
-SUMMARY:UBC Tour - Cordelia
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:cordelia-20260618-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260618T094500
+DTEND;TZID=America/Vancouver:20260618T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:cordelia-20260630-1015-5@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260630T171500Z
-DTEND:20260630T192000Z
-SUMMARY:UBC Tour - Cordelia
-DESCRIPTION:Group Tour - HOLD\nRole: Ambassador\n(HOLD - tentative)
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:cordelia-20260630-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260630T101500
+DTEND;TZID=America/Vancouver:20260630T122000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the Group Tour – HOLD ILSC Education. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260630-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260630T131500
+DTEND;TZID=America/Vancouver:20260630T152000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the Group Tour – HOLD ILSC Education. Tour runs 1:30 PM – 3:00 PM. Your call time is 1:15 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260702-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260702T101500
+DTEND;TZID=America/Vancouver:20260702T122000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the Group Tour – HOLD Boren. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260709-A@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260709T091500
+DTEND;TZID=America/Vancouver:20260709T122000
+SUMMARY:UBC Tour — slot A
+DESCRIPTION:You're slot A on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260713-F@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260713T091500
+DTEND;TZID=America/Vancouver:20260713T112000
+SUMMARY:UBC Tour — slot F
+DESCRIPTION:You're slot F on the Group Tour – HOLD CBC Wenzhou. Tour runs 9:30 AM – 11:00 AM. Your call time is 9:15 AM (through 11:20 AM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260713-F@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260713T124500
+DTEND;TZID=America/Vancouver:20260713T152000
+SUMMARY:UBC Tour — slot F
+DESCRIPTION:You're slot F on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260714-A@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260714T091500
+DTEND;TZID=America/Vancouver:20260714T122000
+SUMMARY:UBC Tour — slot A
+DESCRIPTION:You're slot A on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260717-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260717T124500
+DTEND;TZID=America/Vancouver:20260717T152000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260721-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260721T094500
+DTEND;TZID=America/Vancouver:20260721T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260722-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260722T101500
+DTEND;TZID=America/Vancouver:20260722T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the Group Tour – HOLD Washington High School. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260724-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260724T124500
+DTEND;TZID=America/Vancouver:20260724T152000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260729-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260729T094500
+DTEND;TZID=America/Vancouver:20260729T122000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260730-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260730T123000
+DTEND;TZID=America/Vancouver:20260730T152000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:30 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260806-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260806T094500
+DTEND;TZID=America/Vancouver:20260806T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260810-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260810T124500
+DTEND;TZID=America/Vancouver:20260810T152000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260812-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260812T101500
+DTEND;TZID=America/Vancouver:20260812T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the Group Tour – HOLD for SSLC. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260813-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260813T101500
+DTEND;TZID=America/Vancouver:20260813T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the Group Tour – HOLD. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260814-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260814T094500
+DTEND;TZID=America/Vancouver:20260814T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260817-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260817T094500
+DTEND;TZID=America/Vancouver:20260817T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260818-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260818T101500
+DTEND;TZID=America/Vancouver:20260818T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the Group Tour – HOLD for Powerful Youth. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260821-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260821T124500
+DTEND;TZID=America/Vancouver:20260821T152000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260825-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260825T101500
+DTEND;TZID=America/Vancouver:20260825T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the Group Tour – Delta School District. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260826-A@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260826T101500
+DTEND;TZID=America/Vancouver:20260826T122000
+SUMMARY:UBC Tour — slot A
+DESCRIPTION:You're slot A on the Group Tour – HOLD for Collingwood School. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260828-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260828T124500
+DTEND;TZID=America/Vancouver:20260828T152000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:cordelia-20260831-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260831T094500
+DTEND;TZID=America/Vancouver:20260831T122000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 END:VCALENDAR

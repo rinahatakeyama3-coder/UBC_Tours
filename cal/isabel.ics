@@ -1,207 +1,475 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//UBC Tours//EN
+PRODID:-//UBC Tours//Shift Finder//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:UBC Tours - Isabel
-REFRESH-INTERVAL;VALUE=DURATION:PT12H
-X-PUBLISHED-TTL:PT12H
+X-WR-CALNAME:UBC Tours — Isabel
+X-WR-TIMEZONE:America/Vancouver
+BEGIN:VTIMEZONE
+TZID:America/Vancouver
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
 BEGIN:VEVENT
-UID:isabel-20260604-1230-0@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260604T193000Z
-DTEND:20260604T222000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador + Presenter
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260604-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260604T123000
+DTEND;TZID=America/Vancouver:20260604T152000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:30 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260605-0945-1@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260605T164500Z
-DTEND:20260605T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260605-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260605T094500
+DTEND;TZID=America/Vancouver:20260605T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260605-1245-2@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260605T194500Z
-DTEND:20260605T222000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260605-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260605T124500
+DTEND;TZID=America/Vancouver:20260605T152000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260608-1630-3@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260608T233000Z
-DTEND:20260609T015000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:Virtual Tour\nRole: Virtual host
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260608-Q1@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260608T163000
+DTEND;TZID=America/Vancouver:20260608T185000
+SUMMARY:UBC Tour — slot Q1
+DESCRIPTION:You're slot Q1 on the Virtual Tour. Tour runs 5:00 PM – 6:30 PM. Your call time is 4:30 PM (through 6:50 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260609-1015-4@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260609T171500Z
-DTEND:20260609T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:Group Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260609-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260609T101500
+DTEND;TZID=America/Vancouver:20260609T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the Group Tour – West Point Grey Academy. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260610-1015-5@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260610T171500Z
-DTEND:20260610T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:Group Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260610-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260610T101500
+DTEND;TZID=America/Vancouver:20260610T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the Group Tour – Douglas College. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260612-0945-6@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260612T164500Z
-DTEND:20260612T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260612-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260612T094500
+DTEND;TZID=America/Vancouver:20260612T122000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260615-0945-7@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260615T164500Z
-DTEND:20260615T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260615-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260615T094500
+DTEND;TZID=America/Vancouver:20260615T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260616-0945-8@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260616T164500Z
-DTEND:20260616T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260616-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260616T094500
+DTEND;TZID=America/Vancouver:20260616T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260618-0945-9@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260618T164500Z
-DTEND:20260618T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador + Presenter
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260617-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260617T101500
+DTEND;TZID=America/Vancouver:20260617T122000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the Group Tour – HOLD. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260618-1245-10@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260618T194500Z
-DTEND:20260618T222000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260618-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260618T094500
+DTEND;TZID=America/Vancouver:20260618T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260622-1630-11@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260622T233000Z
-DTEND:20260623T015000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:Virtual Tour\nRole: Virtual host
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260618-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260618T124500
+DTEND;TZID=America/Vancouver:20260618T152000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260623-1245-12@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260623T194500Z
-DTEND:20260623T222000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260622-T2@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260622T163000
+DTEND;TZID=America/Vancouver:20260622T185000
+SUMMARY:UBC Tour — slot T2
+DESCRIPTION:You're slot T2 on the Virtual Tour. Tour runs 5:00 PM – 6:30 PM. Your call time is 4:30 PM (through 6:50 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260624-0915-13@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260624T161500Z
-DTEND:20260624T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador + Presenter
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260623-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260623T101500
+DTEND;TZID=America/Vancouver:20260623T122000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the Group Tour – HOLD. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260624-1230-14@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260624T193000Z
-DTEND:20260624T222000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador + Presenter
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260623-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260623T124500
+DTEND;TZID=America/Vancouver:20260623T152000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260625-1015-15@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260625T171500Z
-DTEND:20260625T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:Group Tour - HOLD\nRole: Ambassador + Presenter\n(HOLD - tentative)
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260624-A@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260624T091500
+DTEND;TZID=America/Vancouver:20260624T122000
+SUMMARY:UBC Tour — slot A
+DESCRIPTION:You're slot A on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260625-1245-16@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260625T194500Z
-DTEND:20260625T222000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260624-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260624T123000
+DTEND;TZID=America/Vancouver:20260624T152000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:30 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260626-0915-17@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260626T161500Z
-DTEND:20260626T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260625-A@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260625T101500
+DTEND;TZID=America/Vancouver:20260625T122000
+SUMMARY:UBC Tour — slot A
+DESCRIPTION:You're slot A on the Group Tour – HOLD. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260626-1245-18@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260626T194500Z
-DTEND:20260626T222000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260625-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260625T124500
+DTEND;TZID=America/Vancouver:20260625T152000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260629-0945-19@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260629T164500Z
-DTEND:20260629T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador + Presenter
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260626-A@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260626T091500
+DTEND;TZID=America/Vancouver:20260626T122000
+SUMMARY:UBC Tour — slot A
+DESCRIPTION:You're slot A on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260630-0945-20@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260630T164500Z
-DTEND:20260630T192000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador + Presenter
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260626-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260626T124500
+DTEND;TZID=America/Vancouver:20260626T152000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 BEGIN:VEVENT
-UID:isabel-20260630-1215-21@ubctours
-DTSTAMP:20260616T022000Z
-DTSTART:20260630T191500Z
-DTEND:20260630T222000Z
-SUMMARY:UBC Tour - Isabel
-DESCRIPTION:In-Person Tour\nRole: Ambassador
-LOCATION:UBC Vancouver Campus, 1874 East Mall, Vancouver, BC V6T 1Z1
+UID:isabel-20260629-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260629T094500
+DTEND;TZID=America/Vancouver:20260629T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260630-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260630T094500
+DTEND;TZID=America/Vancouver:20260630T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260630-A@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260630T121500
+DTEND;TZID=America/Vancouver:20260630T152000
+SUMMARY:UBC Tour — slot A
+DESCRIPTION:You're slot A on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:15 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260702-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260702T093000
+DTEND;TZID=America/Vancouver:20260702T122000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:30 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260707-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260707T094500
+DTEND;TZID=America/Vancouver:20260707T122000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260707-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260707T124500
+DTEND;TZID=America/Vancouver:20260707T152000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260708-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260708T124500
+DTEND;TZID=America/Vancouver:20260708T152000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260714-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260714T124500
+DTEND;TZID=America/Vancouver:20260714T152000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260716-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260716T101500
+DTEND;TZID=America/Vancouver:20260716T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the Shanghai Shi Tu | 10:30 AM – 12:00 PM | A: Ryo (10:15-12:20) B: Molly (10:15-12:20) C: Isabel (10:15-12:20) D: Kris (10:15-12:20) E: Sam (10:15-12:20) F: Oliver (10:15-12:20). Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260720-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260720T094500
+DTEND;TZID=America/Vancouver:20260720T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260722-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260722T124500
+DTEND;TZID=America/Vancouver:20260722T152000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260723-E@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260723T101500
+DTEND;TZID=America/Vancouver:20260723T122000
+SUMMARY:UBC Tour — slot E
+DESCRIPTION:You're slot E on the Group Tour – HOLD 68SD Japanese. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260727-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260727T123000
+DTEND;TZID=America/Vancouver:20260727T152000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:30 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260727-T1@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260727T163000
+DTEND;TZID=America/Vancouver:20260727T185000
+SUMMARY:UBC Tour — slot T1
+DESCRIPTION:You're slot T1 on the Virtual Tour. Tour runs 5:00 PM – 6:30 PM. Your call time is 4:30 PM (through 6:50 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260729-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260729T101500
+DTEND;TZID=America/Vancouver:20260729T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the Group Tour – HOLD. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260730-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260730T101500
+DTEND;TZID=America/Vancouver:20260730T122000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the Group Tour – HOLD. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260731-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260731T123000
+DTEND;TZID=America/Vancouver:20260731T152000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:30 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260805-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260805T094500
+DTEND;TZID=America/Vancouver:20260805T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260806-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260806T101500
+DTEND;TZID=America/Vancouver:20260806T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the Group Tour – HOLD for Ghana Christian. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260810-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260810T123000
+DTEND;TZID=America/Vancouver:20260810T152000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:30 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260813-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260813T094500
+DTEND;TZID=America/Vancouver:20260813T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260814-A@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260814T091500
+DTEND;TZID=America/Vancouver:20260814T122000
+SUMMARY:UBC Tour — slot A
+DESCRIPTION:You're slot A on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260814-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260814T124500
+DTEND;TZID=America/Vancouver:20260814T152000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260819-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260819T101500
+DTEND;TZID=America/Vancouver:20260819T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the Group Tour – HOLD. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260820-C@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260820T094500
+DTEND;TZID=America/Vancouver:20260820T122000
+SUMMARY:UBC Tour — slot C
+DESCRIPTION:You're slot C on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260821-B@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260821T093000
+DTEND;TZID=America/Vancouver:20260821T122000
+SUMMARY:UBC Tour — slot B
+DESCRIPTION:You're slot B on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:30 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260824-F@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260824T124500
+DTEND;TZID=America/Vancouver:20260824T152000
+SUMMARY:UBC Tour — slot F
+DESCRIPTION:You're slot F on the In-Person Tour. Tour runs 1:00 PM – 3:00 PM. Your call time is 12:45 PM (through 3:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260825-F@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260825T094500
+DTEND;TZID=America/Vancouver:20260825T122000
+SUMMARY:UBC Tour — slot F
+DESCRIPTION:You're slot F on the In-Person Tour. Tour runs 10:00 AM – 12:00 PM. Your call time is 9:45 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
+END:VEVENT
+BEGIN:VEVENT
+UID:isabel-20260827-D@ubctours
+DTSTAMP:20260620T021911Z
+DTSTART;TZID=America/Vancouver:20260827T101500
+DTEND;TZID=America/Vancouver:20260827T122000
+SUMMARY:UBC Tour — slot D
+DESCRIPTION:You're slot D on the Group Tour – Delta School District. Tour runs 10:30 AM – 12:00 PM. Your call time is 10:15 AM (through 12:20 PM).
+LOCATION:UBC Vancouver Campus
 END:VEVENT
 END:VCALENDAR
